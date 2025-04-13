@@ -118,7 +118,7 @@ void trajectoryLibrary(const Vector3d start_pt, const Vector3d start_velocity, c
     double min_Cost = 100000.0;
     double Trajctory_Cost;
     TraLibrary  = new TrajectoryStatePtr ** [_discretize_step + 1];     //recored all trajectories after input
-
+    //离散control space
     for(int i=0; i <= _discretize_step; i++){           //acc_input_ax
         TraLibrary[i] = new TrajectoryStatePtr * [_discretize_step + 1];
         for(int j=0;j <= _discretize_step; j++){        //acc_input_ay
@@ -159,6 +159,14 @@ void trajectoryLibrary(const Vector3d start_pt, const Vector3d start_velocity, c
 
 
                     */
+                    pos(0) += vel(0) * delta_time + 0.5 * acc_input(0) * delta_time * delta_time;
+                    pos(1) += vel(1) * delta_time + 0.5 * acc_input(1) * delta_time * delta_time;
+                    pos(2) += vel(2) * delta_time + 0.5 * acc_input(2) * delta_time * delta_time;
+                        
+                    vel(0) += acc_input(0) * delta_time;
+                    vel(1) += acc_input(1) * delta_time;
+                    vel(2) += acc_input(2) * delta_time;
+
                     Position.push_back(pos);
                     Velocity.push_back(vel);
                     double coord_x = pos(0);

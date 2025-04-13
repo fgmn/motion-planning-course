@@ -38,7 +38,7 @@ vector<float>   pointSquaredDistance;
 void RandomMapGenerate()
 {  
    random_device rd;
-   default_random_engine eng(rd());
+   default_random_engine eng(rd());//随机数引擎
    
    uniform_real_distribution<double> rand_x = uniform_real_distribution<double>(_x_l, _x_h );
    uniform_real_distribution<double> rand_y = uniform_real_distribution<double>(_y_l, _y_h );
@@ -145,7 +145,7 @@ void RandomMapGenerate()
       if(is_kdtree_empty == false)
       {
          if ( kdtreeMap.nearestKSearch (searchPoint, 1, pointIdxSearch, pointSquaredDistance) > 0 )
-         {
+         {  //在 KD-tree 中查找最近点（用于避免柱状障碍和已有圆形障碍重合或过近）
             if(sqrt(pointSquaredDistance[0]) < 1.0 )
                continue;
          }
