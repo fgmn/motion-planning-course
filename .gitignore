@@ -1,0 +1,4 @@
+*.log
+**/build/
+**/devel/
+.catkin_workspace
